@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-
 const pizzaData = [
   {
     name: "Focaccia",
@@ -69,10 +68,24 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
     </main>
+  );
+}
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h1>{props.pizzaObj.name}</h1>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
@@ -84,16 +97,6 @@ function Footer() {
         ? `current time is ${time} we are open`
         : `current time is ${time} we are close`}
     </footer>
-  );
-}
-
-function Pizza() {
-  return (
-    <div>
-      <h1>Pizza Prosciutto</h1>
-      <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
-      <img src="pizzas/prosciutto.jpg" alt=" Prosciutto pizza" />
-    </div>
   );
 }
 
